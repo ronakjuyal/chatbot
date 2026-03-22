@@ -19,6 +19,7 @@
           </>
         );
       }
+      
       function ChatMessage({sender, message}){
         return(
           <div>
@@ -29,7 +30,7 @@
         );
       }
       function ChatMessages(){
-        const chatMassages=[{
+        const array=React.useState([{
             sender:'user' ,
             message:'hello',
             id:'id1'
@@ -45,14 +46,23 @@
             sender:'robot' ,
             message:'how can i help you',
             id:'id4'
-          }];
+          }]);
+        // const chatMessages=array[0];
+        // const setChatMessages=array[1];
+        const [chatMessages,setChatMessages] = array;
+        function sendMessage(){
+          setChatMessages([...chatMessages,{sender:'user', 
+                                            message:'new message', 
+                                            id:crypto.randomUUID()}
+          ]);
+        }
           return (
-            chatMassages.map((chatMassage)=>{
+            chatMessages.map((chatMessage)=>{
               return (
                 <ChatMessage
-                  sender={chatMassage.sender}
-                  message={chatMassage.message}
-                  key={chatMassage.id}
+                  sender={chatMessage.sender}
+                  message={chatMessage.message}
+                  key={chatMessage.id}
                 />
               );
             })
